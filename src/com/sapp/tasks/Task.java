@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface Task {
 
-    List<TaskResultEnum> execute();
-    String getSourcePathString();
-    String getDestinationPathString();
+    TaskResult execute();
+    FilePathTrace getPrimaryPathTrace();
+    FilePathTrace getSecondaryPathTrace();
     Drawing getParentDrawing();
 }

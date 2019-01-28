@@ -5,13 +5,13 @@ import java.util.List;
 public class TaskReport {
 
     private Task task;
-    private List<TaskResultEnum> result;
+    private TaskResult result;
 
-    public TaskReport(Task task, List<TaskResultEnum> result) {
+    public TaskReport(Task task, TaskResult result) {
         this.task = task;
         this.result = result;
     }
 
     public Task getTask() { return task; }
-    public List<TaskResultEnum> getResults() { return result; }
+    public TaskResult getResults() { return result; }
 }

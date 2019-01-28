@@ -77,7 +77,7 @@ public class Main {
         System.out.println("Ready!");
 
         /*for (TaskReport t : tr) {
-            MoveFileTask mft = (MoveFileTask)t.getTask();
+            MoveDrawingTask mft = (MoveDrawingTask)t.getTask();
 
             System.out.println("Operation: "+ mft.getSourcePathString() + " -> " + mft.getDestinationPathString() + "<> Result :");
             for (TaskResultEnum e : t.getResults()) {

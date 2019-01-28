@@ -9,27 +9,42 @@ import java.util.List;
 
 public class EmptyTask implements Task {
 
-    private final Path sourcePath;
     private Drawing parentDrawing;
+    private FilePathTrace primaryTrace;
+    private FilePathTrace secondaryTrace;
 
-    public EmptyTask(Drawing parentDrawing, Path sourcePath) {
-        this.sourcePath = sourcePath;
+    public EmptyTask(Drawing parentDrawing) {
         this.parentDrawing = parentDrawing;
+        primaryTrace = new FilePathTrace(
+                parentDrawing.getPrimaryFile().getFilePath(),
+                parentDrawing.getPrimaryFile().getFilePath()
+        );
+
+        secondaryTrace = new FilePathTrace(
+                parentDrawing.getSecondaryFile().getFilePath(),
+                parentDrawing.getSecondaryFile().getFilePath()
+        );
     }
 
     @Override
-    public List<TaskResultEnum> execute() {
-        return new ArrayList<TaskResultEnum>(Arrays.asList(TaskResultEnum.NO_ACTION));
+    public TaskResult execute() {
+
+        TaskResult result = new TaskResult();
+
+        result.getPrimaryResults().add(TaskResultEnum.NO_ACTION);
+        result.getSecondaryResults().add(TaskResultEnum.NO_ACTION);
+
+        return result;
     }
 
     @Override
-    public String getSourcePathString() {
-        return sourcePath.toString();
+    public FilePathTrace getPrimaryPathTrace() {
+        return primaryTrace;
     }
 
     @Override
-    public String getDestinationPathString() {
-        return null;
+    public FilePathTrace getSecondaryPathTrace() {
+        return secondaryTrace;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.sapp.drawings;
 
+import com.sapp.sourceFile.PrimaryFile;
+import com.sapp.sourceFile.SecondaryFile;
 import com.sapp.utils.PathHandler;
 
 import java.nio.file.*;
@@ -38,8 +40,9 @@ public class DrawingScanner {
             if (attr.isRegularFile()) {
                try {
                    if ((new PathHandler(file)).getFileExtension().equalsIgnoreCase(primaryExtension)) {
-                       FileSource source = new FileSource(file, secondaryExtension);
-                       outputList.add(new Drawing(file, source));
+                       PrimaryFile primaryFile = new PrimaryFile(file);
+                       SecondaryFile secondaryFile = new SecondaryFile(primaryFile, secondaryExtension);
+                       outputList.add(new Drawing(primaryFile, secondaryFile));
                    }
 
                } catch (DuplicateRevisionException e) {

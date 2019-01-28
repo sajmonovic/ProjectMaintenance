@@ -19,7 +19,7 @@ public class ConsoleOutput implements OutputHandler {
 
         for (TaskReport t : taskReportList) {
 
-            t.getTask().getSourcePathString();
+            //t.getTask().getSourcePathString();
 
         }
     }
