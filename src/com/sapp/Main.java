@@ -3,6 +3,8 @@ package com.sapp;
 import com.sapp.drawings.DrawingList;
 import com.sapp.drawings.DrawingScanner;
 import com.sapp.drawings.RevisionList;
+import com.sapp.outputhandlers.HTMLOutput;
+import com.sapp.outputhandlers.OutputHandler;
 import com.sapp.tasks.TaskList;
 import com.sapp.tasks.TaskReport;
 import com.sapp.utils.INIFileParser;
@@ -104,7 +106,9 @@ public class Main {
 
         switch (workingMode) {
             case "CLEANUP" :
-                cleanupOperation();
+                //cleanupOperation();
+                OutputHandler OP = new HTMLOutput();
+                OP.outputReport();
                 break;
 
             default:

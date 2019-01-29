@@ -22,11 +22,9 @@ public class INIFileParser {
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))){
 
-
             line = bufferedReader.readLine();
             while ( line != null){
 
-                System.out.println(line);
                 if ((!line.substring(0,1).equals("#"))) {
                     key = (line.substring(0,line.indexOf("="))).trim();
                     value = (line.substring(line.indexOf("=")+1)).trim();

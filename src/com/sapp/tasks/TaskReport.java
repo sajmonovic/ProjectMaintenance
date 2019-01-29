@@ -1,7 +1,5 @@
 package com.sapp.tasks;
 
-import java.util.List;
-
 public class TaskReport {
 
     private Task task;
