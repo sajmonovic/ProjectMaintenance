@@ -10,7 +10,7 @@ public class SuffixGenerator {
 
     public SuffixGenerator() {
 
-        String appendDatePattern = "-yyymmdd_hhmmss";
+        String appendDatePattern = "-yyyMMdd_kkmmss";
         Calendar now = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat(appendDatePattern);
         suffixString = dateFormat.format(now.getTime());

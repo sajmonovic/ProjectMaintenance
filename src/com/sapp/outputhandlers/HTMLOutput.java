@@ -301,7 +301,7 @@ public class HTMLOutput implements OutputHandler {
         tagBODY.close();
         tagHTML.close();
 
-        String appendDatePattern = "_yyy-mm-dd_hh-mm-ss";
+        String appendDatePattern = "_yyy-MM-dd_kk-mm-ss";
         Calendar now = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat(appendDatePattern);
         String timeSignature = dateFormat.format(now.getTime());
