@@ -1,19 +1,20 @@
 package com.sapp.tasks;
 
-import java.util.ArrayList;
+import com.sapp.tasks.taskResults.ResultEnum;
+
 import java.util.List;
 
 public class MoveFileResult {
 
-    private List<TaskResultEnum> taskResultEnums;
+    private List<ResultEnum> resultEnums;
     private FilePathTrace filePathTrace;
 
-    public List<TaskResultEnum> getTaskResultEnums() {
-        return taskResultEnums;
+    public List<ResultEnum> getResultEnums() {
+        return resultEnums;
     }
 
-    public void setTaskResultEnums(List<TaskResultEnum> taskResultEnums) {
-        this.taskResultEnums = taskResultEnums;
+    public void setResultEnums(List<ResultEnum> resultEnums) {
+        this.resultEnums = resultEnums;
     }
 
     public FilePathTrace getFilePathTrace() {

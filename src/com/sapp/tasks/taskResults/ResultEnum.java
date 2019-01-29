@@ -1,6 +1,6 @@
-package com.sapp.tasks;
+package com.sapp.tasks.taskResults;
 
-public enum TaskResultEnum {
+public enum ResultEnum {
 
     SUCCESSFUL,
     FAILED,

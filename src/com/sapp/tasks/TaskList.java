@@ -1,7 +1,9 @@
 package com.sapp.tasks;
 
+import com.sapp.tasks.taskResults.ReportMap;
+import com.sapp.tasks.taskResults.TaskResult;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class TaskList extends ArrayList<Task>{
 
@@ -10,12 +12,12 @@ public class TaskList extends ArrayList<Task>{
         super();
     }
 
-    public List<TaskReport> executeTasks() {
+    public ReportMap executeTasks() {
 
-        List<TaskReport> result = new ArrayList<>();
+        ReportMap result = new ReportMap();
 
         for (Task t : this) {
-            result.add(new TaskReport(t,t.execute()));
+            result.put(t.getParentDrawing(), new TaskResult(t,t.execute()));
         }
         this.clear();
 

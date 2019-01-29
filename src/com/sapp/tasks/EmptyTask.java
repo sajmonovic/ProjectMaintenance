@@ -1,11 +1,8 @@
 package com.sapp.tasks;
 
 import com.sapp.drawings.Drawing;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.sapp.tasks.taskResults.ResultEnum;
+import com.sapp.tasks.taskResults.ResultList;
 
 public class EmptyTask implements Task {
 
@@ -27,12 +24,12 @@ public class EmptyTask implements Task {
     }
 
     @Override
-    public TaskResult execute() {
+    public ResultList execute() {
 
-        TaskResult result = new TaskResult();
+        ResultList result = new ResultList();
 
-        result.getPrimaryResults().add(TaskResultEnum.NO_ACTION);
-        result.getSecondaryResults().add(TaskResultEnum.NO_ACTION);
+        result.getPrimaryResults().add(ResultEnum.NO_ACTION);
+        result.getSecondaryResults().add(ResultEnum.NO_ACTION);
 
         return result;
     }

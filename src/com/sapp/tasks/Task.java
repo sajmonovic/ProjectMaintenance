@@ -1,12 +1,11 @@
 package com.sapp.tasks;
 
 import com.sapp.drawings.Drawing;
-
-import java.util.List;
+import com.sapp.tasks.taskResults.ResultList;
 
 public interface Task {
 
-    TaskResult execute();
+    ResultList execute();
     FilePathTrace getPrimaryPathTrace();
     FilePathTrace getSecondaryPathTrace();
     Drawing getParentDrawing();

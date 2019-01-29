@@ -1,7 +1,7 @@
 package com.sapp.tasks;
 
-import com.sapp.drawings.Drawing;
 import com.sapp.sourceFile.SourceFile;
+import com.sapp.tasks.taskResults.ResultEnum;
 import com.sapp.utils.FileUtility;
 import com.sapp.utils.PathHandler;
 import com.sapp.utils.SuffixGenerator;
@@ -30,7 +30,7 @@ public class MoveFileTask{
 
         MoveFileResult result = new MoveFileResult();
 
-        List<TaskResultEnum> resultEnums = new ArrayList<>();
+        List<ResultEnum> resultEnums = new ArrayList<>();
 
         if (Files.isDirectory(destinationDir, LinkOption.NOFOLLOW_LINKS)) {
 
@@ -39,7 +39,7 @@ public class MoveFileTask{
 
                 if (Files.exists(destinationPath)) {
                     // things to do if file already exists
-                    resultEnums.add(TaskResultEnum.FILE_EXISTS);
+                    resultEnums.add(ResultEnum.FILE_EXISTS);
 
                     destinationPath = (new PathHandler(destinationPath)).addSuffix(sg.getSuffixString());
                 }
@@ -49,16 +49,16 @@ public class MoveFileTask{
                     if (Files.exists(destinationPath)) {
                         if (FileUtility.isTheSame(sourcePath, destinationPath)) {
                             Files.delete(sourcePath);
-                            if (!Files.exists(sourcePath)) resultEnums.add(TaskResultEnum.SUCCESSFUL);
-                            else resultEnums.add(TaskResultEnum.CANT_DELETE);
+                            if (!Files.exists(sourcePath)) resultEnums.add(ResultEnum.SUCCESSFUL);
+                            else resultEnums.add(ResultEnum.CANT_DELETE);
                         }
-                    } else resultEnums.add(TaskResultEnum.FAILED);
+                    } else resultEnums.add(ResultEnum.FAILED);
                 } catch (Exception e) { throw new RuntimeException(e); }
 
-            } else resultEnums.add(TaskResultEnum.NULL_PATH);
+            } else resultEnums.add(ResultEnum.NULL_PATH);
         }
 
-        result.setTaskResultEnums(resultEnums);
+        result.setResultEnums(resultEnums);
         result.setFilePathTrace(new FilePathTrace(sourcePath, destinationPath));
 
         return result;

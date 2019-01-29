@@ -1,15 +1,10 @@
 package com.sapp.tasks;
 
 import com.sapp.drawings.Drawing;
-import com.sapp.utils.FileUtility;
-import com.sapp.utils.PathHandler;
+import com.sapp.tasks.taskResults.ResultList;
 import com.sapp.utils.SuffixGenerator;
 
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MoveDrawingTask implements Task {
 
@@ -34,19 +29,19 @@ public class MoveDrawingTask implements Task {
     }
 
     @Override
-    public TaskResult execute() {
+    public ResultList execute() {
 
-        TaskResult result = new TaskResult();
+        ResultList result = new ResultList();
 
         MoveFileTask primary = new MoveFileTask(parentDrawing.getPrimaryFile(), destinationDir, sg);
         MoveFileResult primaryResults = primary.execute();
         primaryTrace = primaryResults.getFilePathTrace();
-        result.getPrimaryResults().addAll(primaryResults.getTaskResultEnums());
+        result.getPrimaryResults().addAll(primaryResults.getResultEnums());
 
         MoveFileTask secondary = new MoveFileTask(parentDrawing.getSecondaryFile(), destinationDir, sg);
         MoveFileResult secondaryResults = secondary.execute();
         secondaryTrace = secondaryResults.getFilePathTrace();
-        result.getSecondaryResults().addAll(secondaryResults.getTaskResultEnums());
+        result.getSecondaryResults().addAll(secondaryResults.getResultEnums());
 
         return result;
     }
