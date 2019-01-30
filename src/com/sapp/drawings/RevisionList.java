@@ -29,10 +29,22 @@ public class RevisionList extends ArrayList<Drawing> {
         return result;
     }
 
+    public TaskList getEmptyTasks() {
+
+        TaskList result = new TaskList();
+        Drawing currentDrawing;
+
+        for (int i = 0 ; i < this.size(); i++){
+            currentDrawing = this.get(i);
+            result.addAll(currentDrawing.getEmptyTask());
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         for (Drawing d : this){
 

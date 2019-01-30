@@ -1,6 +1,6 @@
-package com.sapp.tasks;
+package com.sapp.tasks.taskResults;
 
-import com.sapp.tasks.taskResults.ResultEnum;
+import com.sapp.tasks.FilePathTrace;
 
 import java.util.List;
 

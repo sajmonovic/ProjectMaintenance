@@ -26,15 +26,15 @@ public class Main {
         System.out.println("");
         System.out.println("Entering cleanup mode in " + workingDIR +" ...");
 
-        System.out.println("     primary file extension : " + iniFile.getParams().get("PRIMARY"));
-        System.out.println("   secondary file extension : " + iniFile.getParams().get("SECONDARY")+"\n");
+        System.out.println("     primary file extension : " + INIFileParser.getParams().get("PRIMARY"));
+        System.out.println("   secondary file extension : " + INIFileParser.getParams().get("SECONDARY")+"\n");
         // new drawing list
         DrawingList DL = new DrawingList();
 
         // new scanner
         DrawingScanner DS = new DrawingScanner(workingDIR, DL,
-                iniFile.getParams().get("PRIMARY"),
-                iniFile.getParams().get("SECONDARY")
+                INIFileParser.getParams().get("PRIMARY"),
+                INIFileParser.getParams().get("SECONDARY")
         );
 
         System.out.println("Scanning directory ... ");
@@ -46,7 +46,7 @@ public class Main {
         TaskList taskList = new TaskList();
 
         // generate destination path
-        Path destinationDir = Paths.get(iniFile.getParams().get("OUTPUT"));
+        Path destinationDir = Paths.get(INIFileParser.getParams().get("OUTPUT"));
         if (!destinationDir.isAbsolute()) {
             destinationDir = Paths.get(workingDIR + "/" +destinationDir.toString());
         }
@@ -77,6 +77,42 @@ public class Main {
         return new OutputContainer(DL, reportMap);
     }
 
+    public static OutputContainer scanOperation() {
+
+        System.out.println("\nEntering scanning mode in " + workingDIR +" ...");
+
+        System.out.println("     primary file extension : " + INIFileParser.getParams().get("PRIMARY"));
+        System.out.println("   secondary file extension : " + INIFileParser.getParams().get("SECONDARY")+"\n");
+        // new drawing list
+        DrawingList DL = new DrawingList();
+
+        // new scanner
+        DrawingScanner DS = new DrawingScanner(workingDIR, DL,
+                INIFileParser.getParams().get("PRIMARY"),
+                INIFileParser.getParams().get("SECONDARY")
+        );
+
+        System.out.println("Scanning directory ... ");
+        // scan working directory
+        DS.scanDirectory();
+        System.out.println("Finished ... \n");
+
+        TaskList taskList = new TaskList();
+
+        System.out.println("Generating results ... ");
+        // collect EmptyTasks
+        for (Map.Entry<String, RevisionList> e : DL.getList().entrySet()) {
+            RevisionList currentList = e.getValue();
+            taskList.addAll(currentList.getEmptyTasks());
+        }
+
+        // executing and gathering reports
+        ReportMap reportMap = taskList.executeTasks();
+        System.out.println("Ready!");
+
+        return new OutputContainer(DL, reportMap);
+    }
+
     public static void main(String[] args) {
 
         System.out.println("┌───────────────────────────────────╖");
@@ -98,6 +134,9 @@ public class Main {
         switch (workingMode) {
             case "CLEANUP" :
                 results = cleanupOperation();
+                break;
+            case "SCAN" :
+                results = scanOperation();
                 break;
             default:
                 break;

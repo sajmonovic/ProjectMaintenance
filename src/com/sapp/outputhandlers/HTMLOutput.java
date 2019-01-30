@@ -175,7 +175,8 @@ public class HTMLOutput implements OutputHandler {
         public String toString() {
             StringBuilder result = new StringBuilder();
             result.append("<img src=\"");
-            result.append(basePath + fileName);
+            result.append(basePath);
+            result.append(fileName);
             result.append("\" title=\"");
             result.append(hint);
             result.append("\" height=\"");
@@ -211,17 +212,17 @@ public class HTMLOutput implements OutputHandler {
         BODY tagBODY = new BODY();
 
         TABLE tagTABLE = new TABLE("" +
-                "border: 2px dashed rgba(28,110,164,0.5); " +
-                "border-radius: 5px; " +
-                "-webkit-box-shadow: 6px 5px 24px 5px rgba(0,0,0,0.76); " +
-                "box-shadow: 6px 5px 24px 5px rgba(0,0,0,0.76); " +
-                "background-color: #F2E6FF; " +
+                "border: 1px SOLID rgba(60,108,109,0.5); " +
+                "border-radius: 2px; " +
+                //"-webkit-box-shadow: 6px 5px 24px 5px rgba(0,0,0,0.76); " +
+                //"box-shadow: 6px 5px 24px 5px rgba(0,0,0,0.76); " +
+                "background-color: #E9F8F8; " +
                 "width: 1200px; " +
                 "font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif; " +
                 "font-size: 12px; " +
                 "letter-spacing: 0px; " +
                 "word-spacing: 2px; " +
-                "color: #3A3A3A; " +
+                "color: #283030; " +
                 "font-weight: 400; " +
                 "text-decoration: none; " +
                 "font-style: normal; " +
@@ -230,7 +231,7 @@ public class HTMLOutput implements OutputHandler {
         );
 
         TABLE.ROW first_row = tagTABLE.createRow("");
-        first_row.insertCell("font-weight: 500; background-color: #E6CCFF; font-size: 18px;", "DRAWING CLEANUP REPORT","7");
+        first_row.insertCell("font-weight: 500; background-color: #C6E0E1; font-size: 18px;", "DRAWING CLEANUP REPORT","7");
         first_row.close();
 
         DrawingList drawingList = input.getDrawingList();
@@ -239,7 +240,7 @@ public class HTMLOutput implements OutputHandler {
         Integer i = 1;
         for (Map.Entry<String, RevisionList> e : drawingList.getList().entrySet()) {
 
-            TABLE.ROW drawingRow = tagTABLE.createRow("background-color: #DDCCFF;");
+            TABLE.ROW drawingRow = tagTABLE.createRow("background-color: #DFE6E6;");
             drawingRow.insertCell("width: 50px;", (i++).toString() ,"1");// count
             drawingRow.insertCell("width: 1150px;", e.getKey(),"6"); // drawing id
             drawingRow.close();
@@ -279,7 +280,6 @@ public class HTMLOutput implements OutputHandler {
 
                         secondaryLinkPath = "file://" + secondaryLinkPath;
                         revisionRow.insertCell("width: 50px;", new LINK(secondaryLinkPath, INIFileParser.getParams().get("SECONDARY").toUpperCase(),"").toString(),"1"); // secondary link
-
                 } else
                 {
                     revisionRow.insertCell("width: 50px;", "","1"); // no secondary

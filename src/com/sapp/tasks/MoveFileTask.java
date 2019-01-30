@@ -1,6 +1,7 @@
 package com.sapp.tasks;
 
 import com.sapp.sourceFile.SourceFile;
+import com.sapp.tasks.taskResults.MoveFileResult;
 import com.sapp.tasks.taskResults.ResultEnum;
 import com.sapp.utils.FileUtility;
 import com.sapp.utils.PathHandler;
