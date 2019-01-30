@@ -16,3 +16,7 @@ no action or scan and cleanup.
 
 The program copies with safety warranty which means it copies file, then analyses it
 and compares to the source file. After similarity is confirmed, the source file is then removed.
+
+The typical drawing name coding in Structural Engineering branch consists of 
+the drawing ID (drawing number, project identifier, prefixes), the drawing title and a drawing revision.
+The software uses regular expressions to split names.
