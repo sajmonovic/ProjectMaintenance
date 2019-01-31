@@ -7,6 +7,7 @@ import com.sapp.utils.FileUtility;
 import com.sapp.utils.PathHandler;
 import com.sapp.utils.SuffixGenerator;
 
+import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -45,17 +46,31 @@ public class MoveFileTask{
                     destinationPath = (new PathHandler(destinationPath)).addSuffix(sg.getSuffixString());
                 }
 
+                boolean copied = false;
                 try {
                     Files.copy(sourcePath, destinationPath);
                     if (Files.exists(destinationPath)) {
                         if (FileUtility.isTheSame(sourcePath, destinationPath)) {
+                            copied = true;
                             Files.delete(sourcePath);
                             if (!Files.exists(sourcePath)) resultEnums.add(ResultEnum.SUCCESSFUL);
                             else resultEnums.add(ResultEnum.CANT_DELETE);
                         }
                     } else resultEnums.add(ResultEnum.FAILED);
-                } catch (Exception e) { throw new RuntimeException(e); }
-
+                } catch (Exception e) {
+                    if (copied) {
+                        System.err.println(e.getMessage());
+                        resultEnums.add(ResultEnum.CANT_DELETE);
+                        System.err.println("File appears to be copied, but it cannot be deleted... \n" +
+                                "Setting CANT_DELETE flag and continuing...");
+                    } else
+                    {
+                        System.err.println(e.getMessage());
+                        resultEnums.add(ResultEnum.FAILED);
+                        System.err.println("Something went wrong... \n" +
+                                "Setting FAILED flag and continuing...");
+                    }
+                }
             } else resultEnums.add(ResultEnum.NULL_PATH);
         }
 

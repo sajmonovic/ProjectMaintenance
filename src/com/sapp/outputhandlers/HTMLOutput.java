@@ -8,7 +8,6 @@ import com.sapp.tasks.taskResults.ReportMap;
 import com.sapp.tasks.taskResults.ResultEnum;
 import com.sapp.utils.INIFileParser;
 
-import javax.xml.transform.Result;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -231,7 +230,7 @@ public class HTMLOutput implements OutputHandler {
         );
 
         TABLE.ROW first_row = tagTABLE.createRow("");
-        first_row.insertCell("font-weight: 500; background-color: #C6E0E1; font-size: 18px;", "DRAWING CLEANUP REPORT","7");
+        first_row.insertCell("font-weight: 500; background-color: #C6E0E1; font-size: 18px;", "REPORT","7");
         first_row.close();
 
         DrawingList drawingList = input.getDrawingList();
